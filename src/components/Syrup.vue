@@ -1,16 +1,22 @@
 <template>
-  <div class="syrup"></div>
+  <div class="syrup" :style="{ height: dynamicHeights.syrup, backgroundColor: syrupColor }"></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue';
+import { currentSyrup, COLORS, dynamicHeights } from "../stores/beverage";
+
+// Compute syrup color based on selection
+const syrupColor = computed(() => COLORS[currentSyrup.value] || 'transparent');
+</script>
+
 <style lang="scss" scoped>
 .syrup {
-  transform: translateY(400%);
-  background-color: #c6c6c6;
+  transform: none;
   position: relative;
   width: 100%;
-  height: 20%;
-  animation: pour-tea 2s 1s forwards;
-  z-index: 2;
+  transition: all 0.7s ease-in-out;
+  animation: none !important;
+  z-index: 200;
 }
 </style>
